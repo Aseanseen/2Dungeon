@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public int maxHealth = 100;
-	public int currentHealth;
+	int maxHealth = 100;
+	int currentHealth;
 
 	public HealthBar healthBar;
     public PlayerMovement playerMovement;
@@ -29,5 +29,8 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
         }
         healthBar.setHealth(currentHealth);
+    }
+    public void setHealth(int health){
+        healthBar.setHealth(health);
     }
 }

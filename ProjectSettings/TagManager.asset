@@ -17,7 +17,7 @@ TagManager:
   - Consumables
   - consumablesLights
   - Obstacles
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Consumables
     uniqueID: 1192474351
+    locked: 0
+  - name: Enemy
+    uniqueID: 916325051
     locked: 0
   - name: Player
     uniqueID: 2396984853

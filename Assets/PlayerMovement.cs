@@ -6,13 +6,15 @@ using UnityEngine.Tilemaps;
 public class PlayerMovement : MonoBehaviour
 {
     float moveSpeed = 15f;
-    float health = 100f;
     public Rigidbody2D rb;
     public Animator anim;
     Vector2 movement;
     public GameObject playerBody;
 
-    public Tilemap tilemap;
+    public Tilemap consumablesTilemap;
+    public Tilemap obstaclesTilemap;
+
+    public PlayerHealth playerHealth;
 // 	public Tile test;
 
     // Update is called once per frame
@@ -42,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
 		Vector3Int tilepos = tilemap.WorldToCell(collision.collider.transform.position);
 		tilemap.SetTile(tilepos, test);
 */
-        // Check if map exists
-        if (tilemap != null && collision.gameObject.layer == LayerMask.NameToLayer("Consumables"))
+        // Check if consumables map exists
+        if (consumablesTilemap != null && collision.gameObject.layer == LayerMask.NameToLayer("Consumables"))
         {
         	// Initialises to 0
 	        Vector3 hitPosition = Vector3.zero;
@@ -54,22 +56,38 @@ public class PlayerMovement : MonoBehaviour
                 hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
                 hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
                 // Removes the tile, by getting the Vector3Int position of it
-                tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
+                consumablesTilemap.SetTile(consumablesTilemap.WorldToCell(hitPosition), null);
             }
         }
         // Removes the lights that are with the consumables and give powerups to player
         if (collision.gameObject.layer == LayerMask.NameToLayer("consumablesLights")){
         	switch (collision.gameObject.name){
         		case "Red": moveSpeed += 10f;break;
-        		case "Green": health += 10f;break;
+        		case "Green": playerHealth.gainHealth(10);break;
         		case "Blue": playerBody.transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);break;
         		case "Yellow": endGame();break;
         	}
         	// Removes the lights
         	Destroy(collision.gameObject);
         }
+        // Check if obstacles map exists
+        if (obstaclesTilemap != null && collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        {
+        	// Initialises to 0
+	        Vector3 hitPosition = Vector3.zero;
+        	// Run through every point of contact in collision
+            foreach (ContactPoint2D hit in collision.contacts)
+            {
+            	// Calculate the position of the block that it hit
+                hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
+                hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
+                // Removes the tile, by getting the Vector3Int position of it
+                obstaclesTilemap.SetTile(obstaclesTilemap.WorldToCell(hitPosition), null);
+            }
+            playerHealth.takeDamage(10);
+        }
 	}
-	void endGame(){
-
+	public void endGame(){
+		Destroy(gameObject);
 	}
 }

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-	int maxHealth = 100;
-	int currentHealth;
+	public int maxHealth = 100;
+	public int currentHealth;
+    public bool isDead = false;
 
 	public HealthBar healthBar;
-	public Animator anim;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +20,17 @@ public class EnemyHealth : MonoBehaviour
     public void takeDamage(int damage){
     	currentHealth -= damage;
         if (currentHealth <= 0){
+            isDead = true;
         	die();
         }
     	healthBar.setHealth(currentHealth);
-    	anim.SetTrigger("Hurt");
+        anim.SetTrigger("Hurt");
+    	
     }
 
 	public void die(){
-		anim.SetBool("isDead", true);
+        isDead = true;
+        anim.SetBool("isDead", true);
 		GetComponent<Collider2D>().enabled = false;
     }
     /*

@@ -11,6 +11,8 @@ public class FollowPlayerUD : MonoBehaviour
 	public BoxCollider2D boxCollider;
 	public LayerMask sidesMask;
 	public LayerMask playerMask;
+  	public PlayerMovement playerMovement;
+  	public EnemyHealth enemyHealth;
 	
 	RaycastHit2D upRay;
 	RaycastHit2D downRay;
@@ -18,6 +20,8 @@ public class FollowPlayerUD : MonoBehaviour
 	float range = 300f;
 
 	Vector2 target;
+  	Vector2 oldUPosition;
+  	Vector2 oldDPosition;
 
 	public Transform upRange;
 	public Transform downRange;
@@ -31,8 +35,11 @@ public class FollowPlayerUD : MonoBehaviour
     {
     	// Casts a box, with the size of the collider, at 0 degree angle, downwards, distance, mask to detect
 //        walkRay = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f,Vector2.up, walkTrigger, playerMask);
+    	isDead = enemyHealth.isDead;
     	if (isDead){
 			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, range, playerMask);
+    		maxDist = 0.1f;
+        	GetComponent<Collider2D>().enabled = false;
     	}
     	else{
     		// Create up and down rays
@@ -44,26 +51,32 @@ public class FollowPlayerUD : MonoBehaviour
     	}
     }
     void FixedUpdate(){
-		if (!isDead){
-			if (upRay.collider != null && upRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
-				transform.position = Vector2.MoveTowards(transform.position, upRay.collider.transform.position, maxDist);
-			}
-			else if (downRay.collider != null && downRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
-				transform.position = Vector2.MoveTowards(transform.position, downRay.collider.transform.position, maxDist);
-			}
-			else{
-				transform.position = Vector2.MoveTowards(transform.position, target, maxDist);
-			}
-		}
-        if(isDead && deadRay.collider != null){
+  		if (!isDead){
+  			if (upRay.collider != null && upRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
+          oldUPosition = transform.position;
+          oldUPosition.y = Mathf.MoveTowards(transform.position.y, upRay.collider.transform.position.y, maxDist);
+          transform.position = oldUPosition;
+//  				transform.position = Vector2.MoveTowards(transform.position, upRay.collider.transform.position, maxDist);
+  			}
+  			else if (downRay.collider != null && downRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
+          oldDPosition = transform.position;
+          oldDPosition.y = Mathf.MoveTowards(transform.position.y, downRay.collider.transform.position.y, maxDist);
+          transform.position = oldDPosition;
+//  				transform.position = Vector2.MoveTowards(transform.position, downRay.collider.transform.position, maxDist);
+  			}
+  			else{
+  				transform.position = Vector2.MoveTowards(transform.position, target, maxDist);
+  			}
+  		}
+      	if(isDead){
         	transform.position = Vector2.MoveTowards(transform.position, deadRay.collider.transform.position, maxDist);
-        }
+      	}
     }
 
-   	void OnCollisionEnter2D(Collision2D collision){
+   	void OnCollisionStay2D(Collision2D collision){
    		if (collision.gameObject.layer != LayerMask.NameToLayer("Player")){
-   			Debug.Log(Mathf.Abs(target.y - upRange.position.y));
-   			Debug.Log(Mathf.Abs(target.y - downRange.position.y));
+   			Debug.Log(Mathf.Abs(target.x - upRange.position.x));
+   			Debug.Log(Mathf.Abs(target.x - downRange.position.x));
    			if (Mathf.Abs(target.y - upRange.position.y) < 1f){
    				target = downRange.position;
    				Debug.Log("Change direction");
@@ -74,9 +87,7 @@ public class FollowPlayerUD : MonoBehaviour
    			}
    		}
    		else{
-   			isDead = true;
-   			maxDist = 0.1f;
-   			GetComponent<Collider2D>().enabled = false;
+	        playerMovement.hurt(1);
    		}
    	}
 

@@ -14,6 +14,7 @@ public class EnemyAttack : MonoBehaviour
 	public Animator anim;
 	public BoxCollider2D boxCollider;
 	public LayerMask playerMask;
+    public EnemyHealth enemyHealth;
 
 	float attackOffsetUD = 4.3f;
 	float attackRange = 1.7f;
@@ -31,6 +32,7 @@ public class EnemyAttack : MonoBehaviour
     {
     	// Casts a box, with the size of the collider, at 0 degree angle, downwards, distance, mask to detect
 //        walkRay = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f,Vector2.up, walkTrigger, playerMask);
+        isDead = enemyHealth.isDead;
     	if (isDead){
 			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, Mathf.Infinity, playerMask);
     	}
@@ -49,13 +51,10 @@ public class EnemyAttack : MonoBehaviour
         if (!isDead && attackRay.collider != null && attackRay.collider.gameObject.name == "Player"){
         	attack();
         }
-        if (boxCollider.enabled == false){
-        	isDead = true;
-        }
         if (walkRay.collider == null || walkRay.collider.gameObject.name != "Player"){
         	anim.SetBool("Move",false);
         }
-        if(isDead && deadRay.collider != null){
+        if(isDead){
         	transform.position = Vector2.MoveTowards(transform.position, deadRay.collider.transform.position, maxDist);
         }
     }
@@ -74,10 +73,6 @@ public class EnemyAttack : MonoBehaviour
     	if (Player != null){
 			Player.GetComponent<PlayerHealth>().takeDamage(attackDamage);
 		}
-    }
-
-    void die(){
-    	isDead = true;
     }
 
     // Just draws the circle for attack range

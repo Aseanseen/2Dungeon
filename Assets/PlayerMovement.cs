@@ -9,8 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
     Vector2 movement;
-
-    public Tilemap consumablesTilemap;
+    
     public Tilemap obstaclesTilemap;
 
     public PlayerHealth playerHealth;
@@ -20,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     float attackOffsetLR = 3f;
     float attackOffsetUD = 4.3f;
 // 	public Tile test;
+
+    int damage = 10;
 
     void Start(){
     	hitCircle.position = transform.position + new Vector3(0,-attackOffsetUD,0);
@@ -73,35 +74,18 @@ public class PlayerMovement : MonoBehaviour
 		tilemap.SetTile(tilepos, test);
 */
 		if (!isDead){
-	        // Check if consumables map exists
-	        if (consumablesTilemap != null && collision.gameObject.layer == LayerMask.NameToLayer("Consumables"))
-	        {
-	        	// Initialises to 0
-		        Vector3 hitPosition = Vector3.zero;
-	        	// Run through every point of contact in collision
-	            foreach (ContactPoint2D hit in collision.contacts)
-	            {
-	            	// Calculate the position of the block that it hit
-	                hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
-	                hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
-	                // Removes the tile, by getting the Vector3Int position of it
-	                consumablesTilemap.SetTile(consumablesTilemap.WorldToCell(hitPosition), null);
-	            }
-	        }
-	        // Removes the lights that are with the consumables and give powerups to player
-	        if (collision.gameObject.layer == LayerMask.NameToLayer("consumablesLights")){
-	        	switch (collision.gameObject.name){
-	        		case "Red": speedUp();break;
-	        		case "Green": heal();break;
-	        		case "Blue": scaleDown();break;
-	        		case "Yellow": endGame();break;
-	        	}
-	        	// Removes the lights
+	        if (collision.gameObject.layer == LayerMask.NameToLayer("Consumables")){
 	        	Destroy(collision.gameObject);
+	        	switch (collision.gameObject.tag){
+	        		case "RedPowerUp": speedUp();break;
+	        		case "GreenPowerUp": heal();break;
+	        		case "BluePowerUp": scaleDown();break;
+	        		case "End": endGame();break;
+	        	}
 	        }
 
 	        // Check if obstacles map exists
-	        if (obstaclesTilemap != null && collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")){
+	        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacles")){
 	        	// Initialises to 0
 		        Vector3 hitPosition = Vector3.zero;
 	        	// Run through every point of contact in collision
@@ -118,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 	            }
 	            else{
 	            	// Damage player
-	            	hurt();
+	            	hurt(damage);
 	            }
 	        }
     	}
@@ -130,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 		moveSpeed += 10f;
 	}
 	public void scaleDown(){
-		transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
+		transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
 	}
 	void die(){
 		isDead = true;
@@ -142,9 +126,9 @@ public class PlayerMovement : MonoBehaviour
 	void heal(){
 		playerHealth.gainHealth(30);
 	}
-	void hurt(){
+	public void hurt(int damage){
         // Damage player
-        playerHealth.takeDamage(10);
+        playerHealth.takeDamage(damage);
         anim.SetTrigger("Hurt");
 	}
 }

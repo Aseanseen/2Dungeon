@@ -32,9 +32,10 @@ public class Falling : MonoBehaviour
     	// Gravity on
     	rb.gravityScale = 9.81f;
     }
-    /*
     void OnCollisionEnter2D(Collision2D collision){
-    	playerMovement.endGame();
+    	if (collision.gameObject.name != "Player"){
+    		boxCollider.enabled = false;
+    		rb.isKinematic = true;
+    	}
     }
-    */
 }

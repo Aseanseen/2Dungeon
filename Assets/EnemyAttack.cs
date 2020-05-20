@@ -55,7 +55,7 @@ public class EnemyAttack : MonoBehaviour
         if (walkRay.collider == null || walkRay.collider.gameObject.name != "Player"){
         	anim.SetBool("Move",false);
         }
-        if(isDead){
+        if(isDead && deadRay.collider != null){
         	transform.position = Vector2.MoveTowards(transform.position, deadRay.collider.transform.position, maxDist);
         }
     }

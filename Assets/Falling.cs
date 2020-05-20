@@ -7,7 +7,8 @@ public class Falling : MonoBehaviour
 //	public PlayerMovement playerMovement;
 	float triggerHeight = 10f;
 	public Rigidbody2D rb;
-	public BoxCollider2D boxCollider;
+//	public BoxCollider2D polyCollider;
+	public PolygonCollider2D polyCollider;
 	public LayerMask playerMask;
 
     // Start is called before the first frame update
@@ -22,7 +23,7 @@ public class Falling : MonoBehaviour
     {
 //		Vector2 triggerPosition = transform.position + new Vector2(0, -25);
     	// Casts a box, with the size of the collider, at 0 degree angle, downwards, distance, mask to detect
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f,Vector2.down, triggerHeight, playerMask);
+        RaycastHit2D hit = Physics2D.BoxCast(polyCollider.bounds.center, polyCollider.bounds.size, 0f,Vector2.down, triggerHeight, playerMask);
         if (hit.collider != null && hit.collider.gameObject.name == "Player"){
         	drop();
         }
@@ -34,8 +35,9 @@ public class Falling : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision){
     	if (collision.gameObject.name != "Player"){
-    		boxCollider.enabled = false;
-    		rb.isKinematic = true;
+    		polyCollider.enabled = false;
+    		rb.bodyType = RigidbodyType2D.Static;
+//    		rb.isKinematic = true;
     	}
     }
 }

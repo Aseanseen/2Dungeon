@@ -244,6 +244,10 @@ MonoBehaviour:
   isDead: 0
   healthBar: {fileID: 893443742}
   anim: {fileID: 6881493}
+  bloodEffect: {fileID: 5117929562026108644, guid: d9721cd34d02f80428a7d36c72cd21b0,
+    type: 3}
+  bloodSplash: {fileID: 4133334521542031841, guid: 62c9466a85b876547ba1997489bdf312,
+    type: 3}
 --- !u!61 &6881497
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -995,7 +999,7 @@ GameObject:
   - component: {fileID: 164345781}
   - component: {fileID: 164345785}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PauseCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1680,7 +1684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72.1, y: -0.3, z: -10}
+  m_LocalPosition: {x: -55, y: 26.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -24512,7 +24516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135441452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72.1, y: -0.3, z: 0}
+  m_LocalPosition: {x: -55, y: 26.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 746570377}
@@ -24554,6 +24558,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 319338018}
   playerMovement: {fileID: 1135441453}
+  bloodEffect: {fileID: 5117929562026108644, guid: d9721cd34d02f80428a7d36c72cd21b0,
+    type: 3}
+  bloodSplash: {fileID: 4133334521542031841, guid: 62c9466a85b876547ba1997489bdf312,
+    type: 3}
 --- !u!114 &1135441460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24631,7 +24639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171537824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72.1, y: -0.3, z: -10}
+  m_LocalPosition: {x: -55, y: 26.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446190221}
@@ -26501,7 +26509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1964597674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26931,21 +26939,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 350623779119193767, guid: 10cac984b6be4f847a712aee1dadae30,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 350623779119193767, guid: 10cac984b6be4f847a712aee1dadae30,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 350623779119193767, guid: 10cac984b6be4f847a712aee1dadae30,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 350623779119193784, guid: 10cac984b6be4f847a712aee1dadae30,
         type: 3}
       propertyPath: playerMovement
@@ -27287,21 +27280,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7757769506744039119, guid: 1c32568111316a94c8e77fe598927d87,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7757769506744039119, guid: 1c32568111316a94c8e77fe598927d87,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7757769506744039119, guid: 1c32568111316a94c8e77fe598927d87,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7757769506744039123, guid: 1c32568111316a94c8e77fe598927d87,
         type: 3}

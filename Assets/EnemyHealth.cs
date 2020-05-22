@@ -10,6 +10,8 @@ public class EnemyHealth : MonoBehaviour
 
 	public HealthBar healthBar;
     public Animator anim;
+    public GameObject bloodEffect;
+    public GameObject bloodSplash;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +21,10 @@ public class EnemyHealth : MonoBehaviour
 
     public void takeDamage(int damage){
     	currentHealth -= damage;
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
         if (currentHealth <= 0){
             isDead = true;
+            Instantiate(bloodSplash, transform.position, Quaternion.identity);
         	die();
         }
     	healthBar.setHealth(currentHealth);

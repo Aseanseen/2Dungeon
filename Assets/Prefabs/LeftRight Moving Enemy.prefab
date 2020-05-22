@@ -532,6 +532,10 @@ MonoBehaviour:
   isDead: 0
   healthBar: {fileID: 7757769506586369875}
   anim: {fileID: 7757769506744039116}
+  bloodEffect: {fileID: 5117929562026108644, guid: 96362e9db0ae7d3449a5cead84bf8bdc,
+    type: 3}
+  bloodSplash: {fileID: 4133334521542031841, guid: 4192881a3d6e4a943bc8e5ff3d41e5f2,
+    type: 3}
 --- !u!1 &7757769507492061957
 GameObject:
   m_ObjectHideFlags: 0

@@ -248,6 +248,8 @@ MonoBehaviour:
     type: 3}
   bloodSplash: {fileID: 4133334521542031841, guid: 62c9466a85b876547ba1997489bdf312,
     type: 3}
+  body: {fileID: 6881494}
+  hurtColor: {r: 1, g: 1, b: 1, a: 0.5882353}
 --- !u!61 &6881497
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,8 +10,12 @@ public class EnemyHealth : MonoBehaviour
 
 	public HealthBar healthBar;
     public Animator anim;
+    
     public GameObject bloodEffect;
     public GameObject bloodSplash;
+
+    public SpriteRenderer body;
+    public Color hurtColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,17 +25,27 @@ public class EnemyHealth : MonoBehaviour
 
     public void takeDamage(int damage){
     	currentHealth -= damage;
+        // Blood effect upon hit
         Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        // Flash effect upon hit
+        StartCoroutine(Flash());
         if (currentHealth <= 0){
             isDead = true;
+            // Blood stain upon death
             Instantiate(bloodSplash, transform.position, Quaternion.identity);
         	die();
         }
+        // Updates helath bar and death animation
     	healthBar.setHealth(currentHealth);
         anim.SetTrigger("Hurt");
     	
     }
-
+    // Handles flash effect
+    IEnumerator Flash(){
+        body.color = hurtColor;
+        yield return new WaitForSeconds(0.1f);
+        body.color = Color.white;
+    }
 	public void die(){
         isDead = true;
         anim.SetBool("isDead", true);

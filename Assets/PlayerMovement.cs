@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerHealth playerHealth;
     public Transform hitCircle;
     bool isDead = false;
+    bool isSlippery = false;
 
     float attackOffsetLR = 3f;
     float attackOffsetUD = 4.3f;
@@ -60,11 +61,18 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
     	if (!isDead){
-    		move();
+    		move(isSlippery);
     	}
     }
-    void move(){
-    	rb.velocity = new Vector2(movement.x,movement.y) * moveSpeed;
+    void move(bool isSlippery){
+		// Allows for knockback of the player
+    	if (isSlippery){
+    		rb.AddForce(movement * moveSpeed, ForceMode2D.Force);
+    	}
+    	else{
+    		rb.velocity = movement * moveSpeed;
+    	}
+//    	rb.velocity = new Vector2(movement.x,movement.y) * moveSpeed;
 //    	rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
@@ -77,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 	        if (collision.gameObject.layer == LayerMask.NameToLayer("Consumables")){
 	        	Destroy(collision.gameObject);
 	        	switch (collision.gameObject.tag){
-	        		case "RedPowerUp": speedUp();break;
+	        		case "RedPowerUp": slippery();break;
 	        		case "GreenPowerUp": heal();break;
 	        		case "BluePowerUp": scaleDown();break;
 	        		case "End": endGame();break;
@@ -110,8 +118,8 @@ public class PlayerMovement : MonoBehaviour
 	public void endGame(){
 		die();
 	}
-	public void speedUp(){
-		moveSpeed += 10f;
+	public void slippery(){
+		isSlippery = true;
 	}
 	public void scaleDown(){
 		transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);

@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
 	public Transform attackPoint;
 	float attackRange = 3f;
 	public LayerMask enemyLayers;
+    float knockForce = 5f;
 
 	int attackDamage = 20;
 
@@ -27,8 +28,13 @@ public class PlayerCombat : MonoBehaviour
     	Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
     	// Damage the enemy that is in the array
-    	foreach(Collider2D Enemy in hitEnemies){
-    		Enemy.GetComponent<EnemyHealth>().takeDamage(attackDamage);
+    	foreach(Collider2D enemy in hitEnemies){
+    		enemy.GetComponent<EnemyHealth>().takeDamage(attackDamage);
+            // Knockback effect after hit
+            Vector3 direction = (enemy.gameObject.transform.position - transform.position).normalized;
+            enemy.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockForce, ForceMode2D.Impulse);
+//            Vector2 diff = (enemy.gameObject.transform.position - transform.position);
+//            enemy.gameObject.transform.position = new Vector2(enemy.gameObject.transform.position.x + diff.x + knockOffset, enemy.gameObject.transform.position.y + diff.y + knockOffset);
 //    		Debug.Log("Enemy hit");
     	}
     }

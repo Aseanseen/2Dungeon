@@ -13,8 +13,8 @@ public class PlayerHealth : MonoBehaviour
     public GameObject bloodEffect;
     public GameObject bloodSplash;
 
-//    public SpriteRenderer body;
-//    public Color hurtColor;
+    public SpriteRenderer body;
+    public Color hurtColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
     public void takeDamage(int damage){
     	currentHealth -= damage;
         // Flash effect upon hit
-//        StartCoroutine(Flash());
+        StartCoroutine(Flash());
         // Blood effect upon hit
         Instantiate(bloodEffect, transform.position, Quaternion.identity);
         // Blood stain upon hit
@@ -35,14 +35,14 @@ public class PlayerHealth : MonoBehaviour
         }
     	healthBar.setHealth(currentHealth);
     }
-    /*
+
     // Handles flash effect
     IEnumerator Flash(){
         body.color = hurtColor;
         yield return new WaitForSeconds(0.05f);
         body.color = Color.white;
     }
-    */
+
     public void gainHealth(int health){
         currentHealth += health;
         if (currentHealth > maxHealth){

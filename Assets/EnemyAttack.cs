@@ -18,6 +18,8 @@ public class EnemyAttack : MonoBehaviour
 
 	float attackOffsetUD = 4.3f;
 	float attackRange = 1.7f;
+	float knockForce = 10f;
+
 	RaycastHit2D walkRay;
 	RaycastHit2D attackRay;
 	RaycastHit2D deadRay;
@@ -30,6 +32,7 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    	hitCircle.position = transform.position + new Vector3(0,attackOffsetUD,0);
     	// Casts a box, with the size of the collider, at 0 degree angle, downwards, distance, mask to detect
 //        walkRay = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f,Vector2.up, walkTrigger, playerMask);
         isDead = enemyHealth.isDead;
@@ -45,13 +48,13 @@ public class EnemyAttack : MonoBehaviour
     	}
     }
     void FixedUpdate(){
-        if (walkRay.collider != null && walkRay.collider.gameObject.name == "Player"){
+        if (walkRay.collider != null && walkRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
         	move();
         }
-        if (!isDead && attackRay.collider != null && attackRay.collider.gameObject.name == "Player"){
+        if (!isDead && attackRay.collider != null && attackRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
         	attack();
         }
-        if (walkRay.collider == null || walkRay.collider.gameObject.name != "Player"){
+        if (walkRay.collider == null || walkRay.collider.gameObject.layer != LayerMask.NameToLayer("Player")){
         	anim.SetBool("Move",false);
         }
         if(isDead){
@@ -68,10 +71,13 @@ public class EnemyAttack : MonoBehaviour
     	anim.SetTrigger("Attack");
 
     	// Creates a circle at the attack point and see if it overlaps with enemy layer
-    	// Gathers a list of enemies that we hit
+    	// Finds the enemy that we hit
     	Collider2D Player = Physics2D.OverlapCircle(hitCircle.position, attackRange, playerMask);
     	if (Player != null){
-			Player.GetComponent<PlayerHealth>().takeDamage(attackDamage);
+        	// Knockback effect after hit
+			Vector3 direction = (Player.gameObject.transform.position - transform.position).normalized;
+			Player.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockForce, ForceMode2D.Impulse);
+			Player.GetComponent<PlayerMovement>().hurt(attackDamage);
 		}
     }
 

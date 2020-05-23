@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 6881496}
   - component: {fileID: 6881497}
   - component: {fileID: 6881498}
+  - component: {fileID: 6881499}
   m_Layer: 12
   m_Name: Warrior_Enemy
   m_TagString: Untagged
@@ -295,6 +296,27 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   enemyHealth: {fileID: 6881496}
+--- !u!50 &6881499
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6881492}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &42772493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 26.4, z: -10}
+  m_LocalPosition: {x: -68.1, y: 17.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -24518,7 +24540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135441452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 26.4, z: 0}
+  m_LocalPosition: {x: -68.1, y: 17.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 746570377}
@@ -24564,6 +24586,8 @@ MonoBehaviour:
     type: 3}
   bloodSplash: {fileID: 4133334521542031841, guid: 62c9466a85b876547ba1997489bdf312,
     type: 3}
+  body: {fileID: 1135441456}
+  hurtColor: {r: 1, g: 1, b: 1, a: 0.5882353}
 --- !u!114 &1135441460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24641,7 +24665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171537824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 26.4, z: -10}
+  m_LocalPosition: {x: -68.1, y: 17.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446190221}

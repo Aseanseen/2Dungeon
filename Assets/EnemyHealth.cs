@@ -50,6 +50,7 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         anim.SetBool("isDead", true);
 		GetComponent<Collider2D>().enabled = false;
+        Destroy(transform.gameObject.GetComponent<Rigidbody2D>());
     }
     /*
     public void gainHealth(int health){

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowPlayerUD : MonoBehaviour
 {
 
-	float maxDist = 0.3f;
+	float maxDist = 0.2f;
 	bool isDead = false;
 
 	public BoxCollider2D boxCollider;
@@ -18,6 +18,7 @@ public class FollowPlayerUD : MonoBehaviour
 	RaycastHit2D downRay;
 	RaycastHit2D deadRay;
 	float range = 300f;
+  float knockForce = 5f;
 
 	Vector2 target;
   	Vector2 oldUPosition;
@@ -75,19 +76,22 @@ public class FollowPlayerUD : MonoBehaviour
 
    	void OnCollisionStay2D(Collision2D collision){
    		if (collision.gameObject.layer != LayerMask.NameToLayer("Player")){
-   			Debug.Log(Mathf.Abs(target.x - upRange.position.x));
-   			Debug.Log(Mathf.Abs(target.x - downRange.position.x));
+//   			Debug.Log(Mathf.Abs(target.x - upRange.position.x));
+//   			Debug.Log(Mathf.Abs(target.x - downRange.position.x));
    			if (Mathf.Abs(target.y - upRange.position.y) < 1f){
    				target = downRange.position;
-   				Debug.Log("Change direction");
+//   				Debug.Log("Change direction");
    			}
    			else if (Mathf.Abs(target.y - downRange.position.y) < 1f){
    				target = upRange.position;
-   				Debug.Log("Change direction");
+//   				Debug.Log("Change direction");
    			}
    		}
    		else{
-	        playerMovement.hurt(1);
+        // Knockback effect after hit only in slippery mode
+        Vector3 direction = (collision.gameObject.transform.position - transform.position).normalized;
+        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockForce, ForceMode2D.Impulse);
+        playerMovement.hurt(1);
    		}
    	}
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4420332639642345424}
   - component: {fileID: 8907342236121989681}
-  - component: {fileID: 4504742972384659136}
+  - component: {fileID: 5586123036197077070}
   m_Layer: 13
   m_Name: RedBloodStain
   m_TagString: Untagged
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 187163435
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 15fb4d7065567fe4ea97f6a4a115605e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44de7951574387445b945c1d0ce994cd, type: 3}
   m_Color: {r: 1, g: 0.1745283, b: 0.1745283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4504742972384659136
+--- !u!114 &5586123036197077070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,6 +91,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4133334521542031841}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70a87e188555ea34eaaea52ae26ff163, type: 3}
+  m_Script: {fileID: 11500000, guid: e9efc7e10a2c8dd428b46fbf4d8ce4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arr:
+  - {fileID: 21300000, guid: a638f32716079d64b961f2be220ce957, type: 3}
+  - {fileID: 21300000, guid: 44de7951574387445b945c1d0ce994cd, type: 3}

@@ -15,7 +15,8 @@ public class StainAway : MonoBehaviour
 	{
 	    float counter = 0;
 	    // Get current color
-	    Color spriteColor = render.material.color;
+	    Color spriteColor = render.color;
+//	    Color spriteColor = render.material.color;
 
 	    while (counter < duration)
 	    {

@@ -24584,7 +24584,7 @@ MonoBehaviour:
   playerMovement: {fileID: 1135441453}
   bloodEffect: {fileID: 5117929562026108644, guid: d9721cd34d02f80428a7d36c72cd21b0,
     type: 3}
-  bloodSplash: {fileID: 4133334521542031841, guid: 62c9466a85b876547ba1997489bdf312,
+  bloodSplash: {fileID: 4133334521542031841, guid: f6562b8206352414898199e81cbe83a5,
     type: 3}
   body: {fileID: 1135441456}
   hurtColor: {r: 1, g: 1, b: 1, a: 0.5882353}

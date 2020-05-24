@@ -91,7 +91,7 @@ public class FollowPlayerUD : MonoBehaviour
         // Knockback effect after hit only in slippery mode
         Vector3 direction = (collision.gameObject.transform.position - transform.position).normalized;
         collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockForce, ForceMode2D.Impulse);
-        playerMovement.hurt(1);
+        playerMovement.hurt(10);
    		}
    	}
 

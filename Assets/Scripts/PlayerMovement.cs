@@ -129,7 +129,9 @@ public class PlayerMovement : MonoBehaviour
 		anim.SetBool("isDead",true);
 		playerHealth.setHealth(0);
 		moveSpeed = 0f;
-		rb.gravityScale = 9.81f;
+		rb.gravityScale = 8f;
+        // Stop enemy from hitting player
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
 	}
 	void heal(){
 		playerHealth.gainHealth(30);

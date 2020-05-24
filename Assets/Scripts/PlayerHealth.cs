@@ -30,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
         Instantiate(bloodEffect, transform.position, Quaternion.identity);
         // Blood stain upon hit
         Instantiate(bloodSplash, transform.position, Quaternion.identity);
+        // Play hurt sound
+        FindObjectOfType<AudioManager>().Play("PlayerHurt");
         if (currentHealth <= 0){
             playerMovement.endGame();
         }

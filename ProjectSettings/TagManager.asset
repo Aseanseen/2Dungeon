@@ -51,6 +51,9 @@ TagManager:
   - name: Ground
     uniqueID: 187163435
     locked: 0
+  - name: Instructions
+    uniqueID: 2219963765
+    locked: 0
   - name: Obstacles
     uniqueID: 989165509
     locked: 0

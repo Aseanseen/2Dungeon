@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     float attackOffsetUD = 4.3f;
 // 	public Tile test;
 
+    public GameObject endMenuUI;
+
     int damage = 10;
 
     void Start(){
@@ -132,6 +134,8 @@ public class PlayerMovement : MonoBehaviour
 		rb.gravityScale = 8f;
         // Stop enemy from hitting player
         gameObject.layer = LayerMask.NameToLayer("Enemy");
+        // Sets the end menu to be active
+    	endMenuUI.SetActive(true);
 	}
 	void heal(){
 		playerHealth.gainHealth(30);

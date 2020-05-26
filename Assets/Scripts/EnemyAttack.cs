@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
 	float walkTrigger = 20f;
 	float attackTrigger = 9f;
-	int attackDamage = 1;
+	int attackDamage = 20;
 	float maxDist = 0.1f;
 	bool isDead = false;
 
@@ -16,7 +16,7 @@ public class EnemyAttack : MonoBehaviour
 	public LayerMask playerMask;
     public EnemyHealth enemyHealth;
 
-	float attackOffsetUD = 4.3f;
+	float attackOffsetUD = 3.5f;
 	float attackRange = 1.7f;
 	float knockForce = 10f;
 

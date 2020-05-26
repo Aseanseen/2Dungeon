@@ -22,6 +22,8 @@ public class PlayerCombat : MonoBehaviour
     }
     void Attack(){
     	anim.SetTrigger("Attack");
+    	// Play hurt sound
+        FindObjectOfType<AudioManager>().Play("Slash");
 
     	// Creates a circle at the attack point and see if it overlaps with enemy layer
     	// Gathers a list of enemies that we hit

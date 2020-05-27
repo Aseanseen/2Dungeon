@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 	public Sound[] sounds;
 	// Static reference to current instance of AudioManager that is present in scene
 	public static AudioManager instance;
-
+	public AudioMixerGroup masterMixer;
 	// Similar to Start() but goes before it
 	void Awake(){
 
@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
 			s.source.volume = s.volume;
 			s.source.pitch = s.pitch;
 			s.source.loop = s.loop;
+			s.source.outputAudioMixerGroup = masterMixer;
 		}
 	}
 

@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 // 	public Tile test;
 
     public GameObject endMenuUI;
+    public FixedJoystick fixedJoystick;
 
     int damage = 10;
 
@@ -32,8 +33,10 @@ public class PlayerMovement : MonoBehaviour
     // Better to handle input here
     void Update()
     {
-    	movement.x = Input.GetAxisRaw("Horizontal");
-    	movement.y = Input.GetAxisRaw("Vertical");
+//    	movement.x = Input.GetAxisRaw("Horizontal");
+//    	movement.y = Input.GetAxisRaw("Vertical");
+    	movement.x = fixedJoystick.Horizontal;
+    	movement.y = fixedJoystick.Vertical;
 
     	anim.SetFloat("Horizontal", movement.x);
     	anim.SetFloat("Vertical", movement.y);

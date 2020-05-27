@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class PlayerCombat : MonoBehaviour
 
 	int attackDamage = 20;
 
+	public Button attackButton;
+
+	void Start(){
+		attackButton.onClick.AddListener(Attack);
+	}
+	/*
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +27,7 @@ public class PlayerCombat : MonoBehaviour
     		Attack();
     	}
     }
+    */
     void Attack(){
     	anim.SetTrigger("Attack");
     	// Play hurt sound

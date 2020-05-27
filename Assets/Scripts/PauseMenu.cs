@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -9,10 +10,12 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
 
     public GameObject pauseMenuUI;
+    public Button pauseButton;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
+        pauseButton.onClick.AddListener(TaskOnClick);
+/*
         if (Input.GetKeyDown(KeyCode.Escape)){
         	if(isPaused){
         		Resume();
@@ -21,6 +24,15 @@ public class PauseMenu : MonoBehaviour
         		Pause();
         	}
 		}
+*/
+    }
+    void TaskOnClick(){
+        if(isPaused){
+            Resume();
+        }
+        else{
+            Pause();
+        }
     }
     public void Resume(){
     	// Sets the menu to be inactive

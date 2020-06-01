@@ -16,29 +16,32 @@ public class EnemyHealth : MonoBehaviour
 
     public SpriteRenderer body;
     public Color hurtColor;
+    Collider2D selfCollider;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
+        selfCollider = GetComponent<Collider2D>();
     }
 
     public void takeDamage(int damage){
-    	currentHealth -= damage;
-        // Blood effect upon hit
-        Instantiate(bloodEffect, transform.position, Quaternion.identity);
-        // Flash effect upon hit
-        StartCoroutine(Flash());
-        if (currentHealth <= 0){
-            isDead = true;
-            // Blood stain upon death
-            Instantiate(bloodSplash, transform.position, Quaternion.identity);
-        	die();
+        if (!isDead){
+        	currentHealth -= damage;
+            // Blood effect upon hit
+            Instantiate(bloodEffect, transform.position, Quaternion.identity);
+            // Flash effect upon hit
+            StartCoroutine(Flash());
+            // Updates helath bar and death animation
+        	healthBar.setHealth(currentHealth);
+            anim.SetTrigger("Hurt");
+        
+            if (currentHealth <= 0){
+                // Blood stain upon death
+                Instantiate(bloodSplash, transform.position, Quaternion.identity);
+                die();
+            }
         }
-        // Updates helath bar and death animation
-    	healthBar.setHealth(currentHealth);
-        anim.SetTrigger("Hurt");
-    	
     }
     // Handles flash effect
     IEnumerator Flash(){
@@ -49,7 +52,7 @@ public class EnemyHealth : MonoBehaviour
 	public void die(){
         isDead = true;
         anim.SetBool("isDead", true);
-		GetComponent<Collider2D>().enabled = false;
+		selfCollider.enabled = false;
         Destroy(transform.gameObject.GetComponent<Rigidbody2D>());
     }
     /*

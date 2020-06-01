@@ -19,7 +19,7 @@ TagManager:
   - 
   - Player
   - Consumables
-  - 
+  - DeadPlayer
   - Obstacles
   - Enemy
   - Ground
@@ -45,24 +45,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
-    uniqueID: 1904393531
-    locked: 0
-  - name: Ground
-    uniqueID: 187163435
-    locked: 0
-  - name: Instructions
-    uniqueID: 2219963765
-    locked: 0
-  - name: Obstacles
-    uniqueID: 989165509
-    locked: 0
-  - name: Consumables
-    uniqueID: 1192474351
-    locked: 0
-  - name: Enemy
-    uniqueID: 916325051
-    locked: 0
-  - name: Player
+  - name: Characters
     uniqueID: 2396984853
     locked: 0

@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public Button pauseButton;
+    public Button attackButton;
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class PauseMenu : MonoBehaviour
     	pauseMenuUI.SetActive(true);
     	// Freeze time
     	Time.timeScale = 0f;
+    	attackButton.interactable = false;
     	isPaused = true;
     }
     public void LoadMenu(){

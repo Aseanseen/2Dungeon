@@ -33,9 +33,8 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
     	hitCircle.position = transform.position + new Vector3(0,attackOffsetUD,0);
-    	// Casts a box, with the size of the collider, at 0 degree angle, downwards, distance, mask to detect
-//        walkRay = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f,Vector2.up, walkTrigger, playerMask);
         isDead = enemyHealth.isDead;
+
     	if (isDead){
 			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, Mathf.Infinity, playerMask);
     	}
@@ -43,8 +42,8 @@ public class EnemyAttack : MonoBehaviour
 	    	walkRay = Physics2D.Raycast(boxCollider.bounds.center, Vector2.up, walkTrigger, playerMask);
 	        attackRay = Physics2D.Raycast(boxCollider.bounds.center, Vector2.up, attackTrigger, playerMask);
 	        
-	        Debug.DrawRay(boxCollider.bounds.center, Vector2.up * (boxCollider.bounds.extents.y + walkTrigger),Color.green);
-	        Debug.DrawRay(boxCollider.bounds.center, Vector2.up * (boxCollider.bounds.extents.y + attackTrigger),Color.red);
+//	        Debug.DrawRay(boxCollider.bounds.center, Vector2.up * (boxCollider.bounds.extents.y + walkTrigger),Color.green);
+//	        Debug.DrawRay(boxCollider.bounds.center, Vector2.up * (boxCollider.bounds.extents.y + attackTrigger),Color.red);
     	}
     }
     void FixedUpdate(){

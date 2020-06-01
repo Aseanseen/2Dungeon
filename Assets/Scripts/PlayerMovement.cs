@@ -14,12 +14,11 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerHealth playerHealth;
     public Transform hitCircle;
-    bool isDead = false;
+    public bool isDead = false;
     bool isSlippery = false;
 
     float attackOffsetLR = 3f;
     float attackOffsetUD = 4.3f;
-// 	public Tile test;
 
     public GameObject endMenuUI;
     public FixedJoystick fixedJoystick;
@@ -86,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 		Vector3Int tilepos = tilemap.WorldToCell(collision.collider.transform.position);
 		tilemap.SetTile(tilepos, test);
 */
-		if (!isDead){
+		if (!isDead && collision.gameObject.layer != LayerMask.NameToLayer("Ground")){
 	        if (collision.gameObject.layer == LayerMask.NameToLayer("Consumables")){
 	        	Destroy(collision.gameObject);
 	        	switch (collision.gameObject.tag){
@@ -136,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 		moveSpeed = 0f;
 		rb.gravityScale = 8f;
         // Stop enemy from hitting player
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
         // Sets the end menu to be active
     	endMenuUI.SetActive(true);
 	}

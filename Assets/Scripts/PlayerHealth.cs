@@ -15,11 +15,13 @@ public class PlayerHealth : MonoBehaviour
 
     public SpriteRenderer body;
     public Color hurtColor;
+    AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void takeDamage(int damage){
@@ -31,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         // Blood stain upon hit
         Instantiate(bloodSplash, transform.position, Quaternion.identity);
         // Play hurt sound
-        FindObjectOfType<AudioManager>().Play("PlayerHurt");
+        audioManager.Play("PlayerHurt");
         if (currentHealth <= 0){
             playerMovement.endGame();
         }

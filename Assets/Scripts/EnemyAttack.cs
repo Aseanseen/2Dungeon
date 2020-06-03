@@ -22,7 +22,7 @@ public class EnemyAttack : MonoBehaviour
 
 	RaycastHit2D walkRay;
 	RaycastHit2D attackRay;
-	RaycastHit2D deadRay;
+	Collider2D deadRay;
 
     // Start is called before the first frame update
     void Start(){
@@ -32,13 +32,14 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	hitCircle.position = transform.position + new Vector3(0,attackOffsetUD,0);
         isDead = enemyHealth.isDead;
 
     	if (isDead){
-			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, Mathf.Infinity, playerMask);
+//			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, Mathf.Infinity, playerMask);
+            deadRay = Physics2D.OverlapCircle(transform.position, 300f, playerMask);
     	}
     	else{
+            hitCircle.position = transform.position + new Vector3(0,attackOffsetUD,0);
 	    	walkRay = Physics2D.Raycast(boxCollider.bounds.center, Vector2.up, walkTrigger, playerMask);
 	        attackRay = Physics2D.Raycast(boxCollider.bounds.center, Vector2.up, attackTrigger, playerMask);
 	        
@@ -47,17 +48,19 @@ public class EnemyAttack : MonoBehaviour
     	}
     }
     void FixedUpdate(){
-        if (walkRay.collider != null && walkRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
-        	move();
-        }
-        if (!isDead && attackRay.collider != null && attackRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
-        	attack();
-        }
-        if (walkRay.collider == null || walkRay.collider.gameObject.layer != LayerMask.NameToLayer("Player")){
-        	anim.SetBool("Move",false);
+        if (!isDead){
+            if (walkRay.collider != null && walkRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
+            	move();
+            }
+            if (!isDead && attackRay.collider != null && attackRay.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
+            	attack();
+            }
+            if (walkRay.collider == null || walkRay.collider.gameObject.layer != LayerMask.NameToLayer("Player")){
+            	anim.SetBool("Move",false);
+            }
         }
         if(isDead){
-        	transform.position = Vector2.MoveTowards(transform.position, deadRay.collider.transform.position, maxDist);
+        	transform.position = Vector2.MoveTowards(transform.position, deadRay.transform.position, maxDist);
         }
     }
 

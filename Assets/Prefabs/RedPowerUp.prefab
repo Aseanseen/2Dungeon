@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2019861951934270314
 Transform:
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Color: {r: 0.9716981, g: 0.45376468, b: 0.5630358, a: 1}
   m_Intensity: 2.2
   m_LightVolumeOpacity: 0.035
-  m_ApplyToSortingLayers: 000000003bbd8271c577f53aefb613471516df8ebb029e36
+  m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 21300000, guid: 2e3cd6c0335f42a4b9e049c24d7537bf,
     type: 3}
   m_UseNormalMap: 0
@@ -89,7 +89,7 @@ GameObject:
   m_TagString: RedPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7335954073077156681
 Transform:
@@ -142,9 +142,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1192474351
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 1bb58dc04965fb1489e5ac2c09505bc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

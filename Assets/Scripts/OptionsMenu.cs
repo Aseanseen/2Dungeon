@@ -11,10 +11,11 @@ public class OptionsMenu : MonoBehaviour
 
     public Slider slider;
     static float sliderVal = 0;
+    static int qualityIndex = 2;
 
 	// Default to the "High" option
 	public void Start(){
-		qualityDropdown.value = 2;
+		qualityDropdown.value = qualityIndex;
         slider.value = sliderVal;
 	}
     public void SetVolume(float volume){
@@ -23,7 +24,8 @@ public class OptionsMenu : MonoBehaviour
 //    	audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
     }
     public void SetQuality (int qualityIndex){
-    	qualityIndex = qualityDropdown.value;
+    	qualityDropdown.value = qualityIndex;
+    	saveQuality();
     	QualitySettings.SetQualityLevel(qualityIndex);
     }
 
@@ -34,5 +36,8 @@ public class OptionsMenu : MonoBehaviour
 
     void saveSlider(){
         sliderVal = slider.value;
+    }
+    void saveQuality(){
+        qualityIndex = qualityDropdown.value;
     }
 }

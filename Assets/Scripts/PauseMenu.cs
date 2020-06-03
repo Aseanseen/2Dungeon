@@ -40,6 +40,7 @@ public class PauseMenu : MonoBehaviour
     	pauseMenuUI.SetActive(false);
     	// Set time
     	Time.timeScale = 1f;
+    	attackButton.interactable = true;
     	isPaused = false;
     }
     void Pause(){

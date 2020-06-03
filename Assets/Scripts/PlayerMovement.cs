@@ -24,9 +24,11 @@ public class PlayerMovement : MonoBehaviour
     public FixedJoystick fixedJoystick;
 
     int damage = 10;
+    Vector3 originalScale;
 
     void Start(){
     	hitCircle.position = transform.position + new Vector3(0,-attackOffsetUD,0);
+    	originalScale = transform.localScale;
     }
     // Update is called once per frame
     // Better to handle input here
@@ -92,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
 	        		case "RedPowerUp": slippery();break;
 	        		case "GreenPowerUp": heal();break;
 	        		case "BluePowerUp": scaleDown();break;
+	        		case "Reset": reset();break;
 	        		case "End": endGame();break;
 	        	}
 	        }
@@ -127,6 +130,11 @@ public class PlayerMovement : MonoBehaviour
 	}
 	public void scaleDown(){
 		transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+	}
+	public void reset(){
+		transform.localScale = originalScale;
+		isSlippery = false;
+		playerHealth.setHealth(100);
 	}
 	void die(){
 		isDead = true;

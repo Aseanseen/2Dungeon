@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 2D Mace View
+  m_Name: SquareSpike
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: f8a61965398b5d04281be703dedb486f, type: 3}
+  m_Sprite: {fileID: -5641331271926917623, guid: 73061cf4b9bf0094a83e78fd067d19e1,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

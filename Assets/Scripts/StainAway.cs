@@ -28,6 +28,7 @@ public class StainAway : MonoBehaviour
 	        // Wait for a frame
 	        yield return null;
     	}
-    	Destroy(gameObject);
+    	gameObject.SetActive(false);
+//    	Destroy(gameObject);
 	}
 }

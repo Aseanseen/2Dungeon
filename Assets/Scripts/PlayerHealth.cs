@@ -16,12 +16,15 @@ public class PlayerHealth : MonoBehaviour
     public SpriteRenderer body;
     public Color hurtColor;
     AudioManager audioManager;
+
+    BloodPool bloodPool;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
         audioManager = FindObjectOfType<AudioManager>();
+        bloodPool = BloodPool.Instance;
     }
 
     public void takeDamage(int damage){
@@ -29,9 +32,11 @@ public class PlayerHealth : MonoBehaviour
         // Flash effect upon hit
         StartCoroutine(Flash());
         // Blood effect upon hit
-        Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        bloodPool.SpawnFromPool("Blood",transform.position, Quaternion.identity);
+//        Instantiate(bloodEffect, transform.position, Quaternion.identity);
         // Blood stain upon hit
-        Instantiate(bloodSplash, transform.position, Quaternion.identity);
+        bloodPool.SpawnFromPool("FadeRed",transform.position, Quaternion.identity);
+//        Instantiate(bloodSplash, transform.position, Quaternion.identity);
         // Play hurt sound
         audioManager.Play("PlayerHurt");
         if (currentHealth <= 0){

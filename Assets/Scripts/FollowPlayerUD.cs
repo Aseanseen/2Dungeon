@@ -16,7 +16,7 @@ public class FollowPlayerUD : MonoBehaviour
 	
 	RaycastHit2D upRay;
 	RaycastHit2D downRay;
-	RaycastHit2D deadRay;
+	Collider2D deadRay;
 	float range = 300f;
   float knockForce = 5f;
 
@@ -38,7 +38,8 @@ public class FollowPlayerUD : MonoBehaviour
     {
     	isDead = enemyHealth.isDead;
     	if (isDead){
-			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, range, playerMask);
+//			deadRay = Physics2D.CircleCast(transform.position, Mathf.Infinity, Vector2.up, range, playerMask);
+        deadRay = Physics2D.OverlapCircle(transform.position, range, playerMask);
     		maxDist = 0.1f;
         	selfCollider.enabled = false;
     	}
@@ -68,7 +69,7 @@ public class FollowPlayerUD : MonoBehaviour
   			}
   		}
       	if(isDead){
-        	transform.position = Vector2.MoveTowards(transform.position, deadRay.collider.transform.position, maxDist);
+        	transform.position = Vector2.MoveTowards(transform.position, deadRay.transform.position, maxDist);
       	}
     }
 

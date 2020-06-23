@@ -8,6 +8,9 @@ TagManager:
   - BluePowerUp
   - RedPowerUp
   - End
+  - MoveTut
+  - WepTut
+  - Final
   layers:
   - Default
   - TransparentFX

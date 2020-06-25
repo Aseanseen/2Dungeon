@@ -10,7 +10,9 @@ TagManager:
   - End
   - MoveTut
   - WepTut
+  - endTut
   - Final
+  - GM
   layers:
   - Default
   - TransparentFX

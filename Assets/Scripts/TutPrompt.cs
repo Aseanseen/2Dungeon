@@ -1,9 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PromptController : MonoBehaviour
+public class TutPrompt : MonoBehaviour
 {
 	public PlayerMovement playerMovement;
 	public PlayerCombat playerCombat;
@@ -21,23 +21,35 @@ public class PromptController : MonoBehaviour
 
 	public GameObject player;
 	public GameObject textBox;
+
 	public List<GameObject> toDestroy = new List<GameObject>();
 	Vector3 startPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement.enabled = false;
-        playerCombat.enabled = false;
-        attackButton.interactable = false;
+     //    playerMovement.enabled = false;
+     //    playerCombat.enabled = false;
+     //    attackButton.interactable = false;
 
-    	speech = speechList[i];
+    	// speech = speechList[i];
 
-    	speech.SetActive(true);
+    	// speech.SetActive(true);
 
     	startPosition = player.transform.position;
 
     	attackButton.onClick.AddListener(Attack);
+    }
+    void OnTriggerEnter2D(Collider2D playerCol){
+    	if (playerCol.CompareTag("Player") && (i == 0)){
+    		textBox.SetActive(true);
+	        playerMovement.enabled = false;
+	        playerCombat.enabled = false;
+	        attackButton.interactable = false;
+
+        	speech = speechList[i];
+    		speech.SetActive(true);
+    	}
     }
     void Update()
     {
@@ -52,21 +64,23 @@ public class PromptController : MonoBehaviour
 	    		}
 	    	}
 	    	// Check if player touches screen and after delay
-	    	else if (Input.touchCount > 0 && speech.tag != "Final" && !wait)
+	    	else if ((Input.touchCount > 0 || (Input.GetButtonDown("Jump"))) && speech.tag != "endTut" && !wait)
 	    	{
 	    		StartCoroutine(NextWord(speech));
 	    	}
 
-	    	// If no more speech, destroy the speech object
-	    	else if (speech.tag == "Final" && !wait)
+	    	// End of tut, destroy tut
+	    	else if ((Input.touchCount > 0 || (Input.GetButtonDown("Jump"))) && speech.tag == "endTut" && !wait)
 	    	{
-	    		speechList.Clear();
+	    		// speechList.Clear();
+	    		// speech.SetActive(false);
 	    		Destroy(speech);
     		    foreach(GameObject des in toDestroy)
      			{
          			Destroy(des);
      			}
 	    		textBox.SetActive(false);
+	    		Destroy(gameObject);
 	    	}
     	}
 
